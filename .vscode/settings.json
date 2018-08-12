@@ -52,5 +52,7 @@
         "ProjectSettings/":true,
         "temp/":true,
         "Temp/":true
-    }
+    },
+    "git.ignoreLimitWarning": true,
+    "python.pythonPath": "${workspaceFolder}/venv/bin/python"
 }

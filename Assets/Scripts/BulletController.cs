@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MLAgents;
 
 public class BulletController : MonoBehaviour {
 
@@ -21,12 +22,15 @@ public class BulletController : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter2D(Collider2D coll) {
-		// 衝突したときにスコアを更新する
-		GameObject.Find ("Canvas").GetComponent<UIController> ().AddScore ();
+		if (coll.gameObject.tag == "Rock")
+		{
+			// 衝突したときにスコアを更新する
+			GameObject.Find ("Canvas").GetComponent<UIController> ().AddScore ();
 
-		// 爆発エフェクトを生成する	
-		Instantiate (explosionPrefab, transform.position, Quaternion.identity);
-		Destroy (coll.gameObject);
-		Destroy (gameObject);
+			// 爆発エフェクトを生成する	
+			Instantiate (explosionPrefab, transform.position, Quaternion.identity);
+			Destroy (coll.gameObject);
+			Destroy (gameObject);
+		}
 	}
 }
