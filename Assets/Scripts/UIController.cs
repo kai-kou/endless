@@ -19,6 +19,6 @@ public class UIController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		scoreText.GetComponent<Text> ().text = "Score:" + score.ToString("D4");	
+		scoreText.GetComponent<Text> ().text = "Score:" + score;
 	}
 }

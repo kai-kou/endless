@@ -18,7 +18,6 @@ public class RocketAgent : Agent
     public override void CollectObservations()
     {
         AddVectorObs(Rocket.transform.position.x);
-        Debug.Log(Rocket.transform.position.x);
     }
 
     /// <summary>
@@ -27,6 +26,7 @@ public class RocketAgent : Agent
     /// </summary>
 	public override void AgentReset()
     {
+        // transform.localPosition = new Vector3(0, -4, 10f);
     }
 
     public override void AgentAction(float[] vectorAction, string textAction)
@@ -39,7 +39,7 @@ public class RocketAgent : Agent
         if (coll.gameObject.tag == "Rock")
         {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-            AddReward(-1f);
+            AddReward(-10f);
             Done();
         }
     }
@@ -52,23 +52,28 @@ public class RocketAgent : Agent
         if (action==1)
         {
             transform.Translate (-0.1f, 0, 0);
-            AddReward(0.1f);
         }
         if (action==2)
         {
             transform.Translate (0.1f, 0, 0);
-            AddReward(0.1f);
         }
 
-        if (transform.localPosition.x < -2f)
+        if (transform.localPosition.x < -2.5f)
         {
             transform.localPosition =
-                new Vector3(-2f, transform.localPosition.y, transform.localPosition.z);
+                new Vector3(-2.5f, transform.localPosition.y, transform.localPosition.z);
+            AddReward(-1f);
+            Done();
         }
-        if (2f < transform.localPosition.x)
+        else if (2.5f < transform.localPosition.x)
         {
             transform.localPosition =
-                new Vector3(2f, transform.localPosition.y, transform.localPosition.z);
+                new Vector3(2.5f, transform.localPosition.y, transform.localPosition.z);
+            AddReward(-1f);
+            Done();
+        }
+        else {
+            AddReward(1f);
         }
     }
 }
