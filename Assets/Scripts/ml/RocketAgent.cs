@@ -9,6 +9,7 @@ public class RocketAgent : Agent
     public float speed;
     public GameObject Rocket;
     public GameObject explosionPrefab;
+    public GameObject bulletPrefab;
 
     public override void InitializeAgent()
     {
@@ -40,6 +41,7 @@ public class RocketAgent : Agent
         {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             AddReward(-10f);
+            GameObject.Find("Canvas").GetComponent<UIController>().AddScore(-10);
             Done();
         }
     }
@@ -56,6 +58,10 @@ public class RocketAgent : Agent
         if (action==2)
         {
             transform.Translate (0.1f, 0, 0);
+        }
+        if (action==3)
+        {
+            Instantiate (bulletPrefab, transform.position, Quaternion.identity);
         }
 
         if (transform.localPosition.x < -2.5f)
@@ -75,5 +81,10 @@ public class RocketAgent : Agent
         else {
             AddReward(1f);
         }
+    }
+
+    public void AddReward()
+    {
+        AddReward(10f);
     }
 }

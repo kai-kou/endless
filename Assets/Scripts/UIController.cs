@@ -8,8 +8,8 @@ public class UIController : MonoBehaviour {
 	int score = 0;
 	GameObject scoreText;
 
-	public void AddScore(){
-		this.score += 10;
+	public void AddScore(int score){
+		this.score += score;
 	}
 
 	// Use this for initialization
