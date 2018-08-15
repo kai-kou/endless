@@ -14,7 +14,7 @@ public class RockGenerator : MonoBehaviour {
 	void GenRock () {
 		Instantiate (
 			rockPrefab,
-			new Vector3(-2.5f + 5 * Random.value, 6, 0),
+			new Vector3(-2.5f + 5f * Random.value, 5f, 0),
 			Quaternion.identity
 		);
 	}

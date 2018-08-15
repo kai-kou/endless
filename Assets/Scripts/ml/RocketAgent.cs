@@ -6,8 +6,6 @@ using MLAgents;
 
 public class RocketAgent : Agent
 {
-    public float speed;
-    public GameObject Rocket;
     public GameObject explosionPrefab;
     public GameObject bulletPrefab;
 
@@ -18,7 +16,26 @@ public class RocketAgent : Agent
 
     public override void CollectObservations()
     {
-        AddVectorObs(Rocket.transform.position.x);
+        AddVectorObs(transform.position.x);
+        AddVectorObs(transform.position.y);
+        var rockCount = 1;
+        foreach (var rock in GameObject.FindGameObjectsWithTag("Rock"))
+        {
+            AddVectorObs(rock.transform.position.x);
+            AddVectorObs(rock.transform.position.y);
+            AddVectorObs(rock.GetComponent<RockController>().endurance);
+            
+            if (rockCount++ >= 20)
+            {
+                break;
+            }
+        }
+        for (int i = rockCount;i <= 20;i++)
+        {
+            AddVectorObs(0f);
+            AddVectorObs(0f);
+            AddVectorObs(0f);
+        }
     }
 
     /// <summary>
@@ -27,7 +44,6 @@ public class RocketAgent : Agent
     /// </summary>
 	public override void AgentReset()
     {
-        // transform.localPosition = new Vector3(0, -4, 10f);
     }
 
     public override void AgentAction(float[] vectorAction, string textAction)
@@ -39,9 +55,10 @@ public class RocketAgent : Agent
     {
         if (coll.gameObject.tag == "Rock")
         {
-            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-            AddReward(-10f);
+            var explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            Destroy(explosion, 2);
             GameObject.Find("Canvas").GetComponent<UIController>().AddScore(-10);
+            AddReward(-0.1f);
             Done();
         }
     }
@@ -49,42 +66,41 @@ public class RocketAgent : Agent
     public void MoveAgent(float[] act)
     {
         int action = Mathf.FloorToInt(act[0]);
+        float speed = 0.2f;
 
         //アクション
         if (action==1)
         {
-            transform.Translate (-0.1f, 0, 0);
+            transform.Translate(-1 * speed, 0, 0);
         }
         if (action==2)
         {
-            transform.Translate (0.1f, 0, 0);
+            transform.Translate(speed, 0, 0);
         }
         if (action==3)
         {
-            Instantiate (bulletPrefab, transform.position, Quaternion.identity);
+            Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            GameObject.Find("Canvas").GetComponent<UIController>().AddScore(-10);
         }
 
-        if (transform.localPosition.x < -2.5f)
+        if (transform.localPosition.x < -300f)
         {
             transform.localPosition =
-                new Vector3(-2.5f, transform.localPosition.y, transform.localPosition.z);
-            AddReward(-1f);
-            Done();
+                new Vector3(-300f, transform.localPosition.y, transform.localPosition.z);
         }
-        else if (2.5f < transform.localPosition.x)
+        else if (300f < transform.localPosition.x)
         {
             transform.localPosition =
-                new Vector3(2.5f, transform.localPosition.y, transform.localPosition.z);
-            AddReward(-1f);
-            Done();
-        }
-        else {
-            AddReward(1f);
+                new Vector3(300f, transform.localPosition.y, transform.localPosition.z);
         }
     }
 
-    public void AddReward()
+    public void Rocket_AddReward(float reward)
     {
-        AddReward(10f);
+        AddReward(reward);
+        if (reward < 0)
+        {
+            Done();
+        }
     }
 }
