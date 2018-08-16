@@ -22,7 +22,7 @@ public class RockController : MonoBehaviour {
 
 		if (transform.position.y < -5.5f) {
 			Destroy (gameObject);
-			GameObject.Find("Canvas").GetComponent<UIController>().AddScore(-500);
+			GameObject.Find("Canvas").GetComponent<UIController>().AddScore(-5000);
 			GameObject.Find("Rocket").GetComponent<RocketAgent>().Rocket_AddReward(-5f);
 		}
 	}

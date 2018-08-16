@@ -29,8 +29,8 @@ public class BulletController : MonoBehaviour {
 				var explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 				Destroy(explosion, 2);
 				Destroy(coll.gameObject);
-				GameObject.Find("Canvas").GetComponent<UIController>().AddScore(100);
-				GameObject.Find("Rocket").GetComponent<RocketAgent>().Rocket_AddReward(1f);
+				GameObject.Find("Canvas").GetComponent<UIController>().AddScore(500);
+				GameObject.Find("Rocket").GetComponent<RocketAgent>().Rocket_AddReward(3f);
 			}
 
 			Destroy(this.gameObject);

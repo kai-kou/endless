@@ -80,7 +80,7 @@ public class RocketAgent : Agent
         if (action==3)
         {
             Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-            GameObject.Find("Canvas").GetComponent<UIController>().AddScore(-10);
+            GameObject.Find("Canvas").GetComponent<UIController>().AddScore(-5);
         }
 
         if (transform.localPosition.x < -300f)
