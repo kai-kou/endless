@@ -68,6 +68,7 @@ Unityアプリで[ゲーム開始(三角)]ボタンをクリックします。
 > git clone  --recursive https://github.com/kai-kou/endress.git
 > cd endress
 > python -m venv venv
+> . venv/bin/activate
 > cd ml-agents/python
 > pip install -r requirements.txt
 ```
