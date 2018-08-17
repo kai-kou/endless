@@ -26,6 +26,9 @@ https://qiita.com/God_KonaBanana/items/7aebdb411c99b059cc6f
 
 Unity ML-Agentsで強化学習させている様子です。  
 
+<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">2DシューティングをUnity ML-Agentsで強化学習させてみた。<br>いい感じに動くようになった！ <a href="https://t.co/b9IdZB32bK">pic.twitter.com/b9IdZB32bK</a></p>&mdash; 甲斐甲@GCPとUnity勉強中 (@k_aik_ou) <a href="https://twitter.com/k_aik_ou/status/1030279378125475840?ref_src=twsrc%5Etfw">2018年8月17日</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 
 ## Requirement
 
